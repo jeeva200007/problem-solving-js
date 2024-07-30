@@ -1,17 +1,21 @@
-// find the missing letter
+// unicode method
 
-function missingLetter(arr) {
-  const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const startIndex = alphabet.indexOf(arr[0]);
+//  find  missing letters in the array
+
+function findTwoMissingLetters(arr) {
+  let start = arr[0].charCodeAt(0);
+  let missingLetters = [];
 
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] !== alphabet[startIndex + i]) {
-      return alphabet[startIndex + i];
+    const current = arr[i].charCodeAt(0);
+
+    while (current - start > 1) {
+      start++;
+      missingLetters.push(String.fromCharCode(start));
     }
+    start = current;
   }
-  return "";
+  return missingLetters.toString();
 }
 
-let arr = ["a", "b", "c", "e", "g"];
-
-console.log(missingLetter(arr));
+console.log(findTwoMissingLetters(arr));
